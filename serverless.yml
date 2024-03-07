@@ -1,0 +1,30 @@
+service: my-first-sls-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /{id}
+          method: get
+          headerParameters:
+            Authorization: 
+              required: true
+              type: string
+          queryStringParameters:
+            page:
+              required: false
+              type: string
+            limit:
+              required: false
+              type: string
+
+plugins:
+  - serverless-offline
+  - serverless-auto-swagger
+
