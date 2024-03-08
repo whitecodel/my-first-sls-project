@@ -6,12 +6,17 @@ provider:
   runtime: nodejs18.x
 
 functions:
+  authorizerFunc:
+    handler: src/middlewares/auth.handler
   api:
     handler: index.handler
     events:
       - httpApi:
           path: /{id}
           method: get
+          authorizer: 
+            name: authorizerFunc
+            type: request
           headerParameters:
             Authorization: 
               required: true
@@ -23,8 +28,18 @@ functions:
             limit:
               required: false
               type: string
+          bodyType: 'Home'
+  register:
+    handler: src/handlers/auth/register.handler
+    events:
+      - httpApi:
+          path: /register
+          method: post
+          bodyType: 'Register'
 
 plugins:
   - serverless-offline
   - serverless-auto-swagger
+  - serverless-dotenv-plugin 
+  - serverless-webpack
 

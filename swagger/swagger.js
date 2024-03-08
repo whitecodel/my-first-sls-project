@@ -19,6 +19,15 @@
         ],
         "parameters": [
           {
+            "in": "body",
+            "name": "body",
+            "description": "Body required in the request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Home"
+            }
+          },
+          {
             "name": "id",
             "in": "path",
             "required": true,
@@ -49,8 +58,91 @@
           }
         }
       }
+    },
+    "/register": {
+      "post": {
+        "summary": "register",
+        "description": "",
+        "operationId": "register.post./register",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Body required in the request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Register"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          }
+        }
+      }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "Home": {
+      "properties": {
+        "id": {
+          "title": "Home.id",
+          "type": "number"
+        },
+        "name": {
+          "title": "Home.name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Home.description",
+          "type": "string"
+        },
+        "price": {
+          "title": "Home.price",
+          "type": "number"
+        },
+        "image": {
+          "title": "Home.image",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "price",
+        "image"
+      ],
+      "additionalProperties": false,
+      "title": "Home",
+      "type": "object"
+    },
+    "Register": {
+      "properties": {
+        "username": {
+          "title": "Register.username",
+          "type": "string"
+        },
+        "password": {
+          "title": "Register.password",
+          "type": "string"
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ],
+      "additionalProperties": false,
+      "title": "Register",
+      "type": "object"
+    }
+  },
   "securityDefinitions": {}
 };
